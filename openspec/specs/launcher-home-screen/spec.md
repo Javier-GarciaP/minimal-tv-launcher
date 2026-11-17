@@ -43,11 +43,18 @@ distancia de sofá.
 
 ### Requirement: Apps destacadas en la parte superior
 Las apps que el usuario marque como destacadas SHALL aparecer agrupadas en la parte
-superior de la lista, encima del resto de aplicaciones.
+superior de la lista, encima del resto de aplicaciones. Cuando haya apps marcadas y
+también sin marcar, SHALL haber un encabezado que las separe, para que ninguna app
+parezca destacada por error.
 
 #### Scenario: Hay apps destacadas marcadas
 - **WHEN** el usuario ha marcado al menos una app como destacada
 - **THEN** esas apps aparecen arriba en la lista, por encima de las demás
+
+#### Scenario: El resto de las apps queda separado
+- **WHEN** hay apps marcadas y apps sin marcar
+- **THEN** las apps sin marcar aparecen bajo un encabezado propio, separado del grupo
+  de las destacadas
 
 #### Scenario: No hay ninguna app destacada
 - **WHEN** el usuario no ha marcado ninguna app como destacada

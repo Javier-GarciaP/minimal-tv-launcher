@@ -18,29 +18,50 @@ object FocusEffects {
     const val DURATION_MS = 140L
 
     /**
-     * Applies the focus effect to a row.
+     * The size a row has with the given focus state.
      *
-     * [scale] has to stay off for rows that fill the screen width: growing them would
-     * push the text past the screen edges and clip it. The home screen list uses a
-     * narrow column, so there the growth works as intended.
+     * A row that is not focused always goes back to its normal size, and a row that
+     * fills the screen width never grows: growing it would push the text past the
+     * screen edges and clip it. The home screen list uses a narrow column, so there the
+     * growth works as intended.
      */
+    fun scaleFor(focused: Boolean, scale: Boolean = true): Float =
+        if (focused && scale) SCALE_FOCUSED else SCALE_UNFOCUSED
+
+    /** The opacity a row has with the given focus state. */
+    fun alphaFor(focused: Boolean): Float =
+        if (focused) ALPHA_FOCUSED else ALPHA_UNFOCUSED
+
+    /** Animates a row into the state its focus says it should be in. */
     fun apply(view: View, focused: Boolean, scale: Boolean = true) {
-        val factor = if (scale) SCALE_FOCUSED else SCALE_UNFOCUSED
-        val alpha = if (focused) ALPHA_FOCUSED else ALPHA_UNFOCUSED
         view.animate()
-            .scaleX(factor)
-            .scaleY(factor)
-            .alpha(alpha)
+            .scaleX(scaleFor(focused, scale))
+            .scaleY(scaleFor(focused, scale))
+            .alpha(alphaFor(focused))
             .setDuration(DURATION_MS)
             .start()
+    }
+
+    /**
+     * Puts a row in the state its focus flag says it should be in, without animating.
+     *
+     * Rebinding a row does not fire the focus listener, so a row that keeps the focus
+     * while it is rebound would stay in the unfocused look: it would show the
+     * selection box without growing.
+     */
+    fun sync(view: View, scale: Boolean = true) {
+        val focused = view.hasFocus()
+        view.animate().cancel()
+        view.scaleX = scaleFor(focused, scale)
+        view.scaleY = scaleFor(focused, scale)
+        view.alpha = alphaFor(focused)
     }
 
     /** Resets a recycled row to its unfocused look without animating. */
     fun reset(view: View, scale: Boolean = true) {
         view.animate().cancel()
-        val factor = if (scale) SCALE_UNFOCUSED else SCALE_UNFOCUSED
-        view.scaleX = factor
-        view.scaleY = factor
-        view.alpha = ALPHA_UNFOCUSED
+        view.scaleX = scaleFor(false, scale)
+        view.scaleY = scaleFor(false, scale)
+        view.alpha = alphaFor(false)
     }
 }

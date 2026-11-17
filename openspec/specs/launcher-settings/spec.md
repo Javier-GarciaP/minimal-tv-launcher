@@ -20,6 +20,24 @@ cada una.
 - **WHEN** el usuario desmarca una app que era destacada
 - **THEN** la app vuelve a su posición normal en la lista
 
+### Requirement: Filtro de apps destacadas
+Los ajustes SHALL permitir mostrar solo las apps destacadas en la pantalla de inicio,
+ocultando el resto. El filtro SHALL estar desactivado por defecto y SHALL aplicarse de
+inmediato.
+
+#### Scenario: Activar el filtro
+- **WHEN** el usuario activa "Mostrar solo las apps destacadas"
+- **THEN** la pantalla de inicio muestra únicamente las apps marcadas y la entrada de
+  configuración
+
+#### Scenario: Desactivar el filtro
+- **WHEN** el usuario desactiva el filtro
+- **THEN** la pantalla de inicio vuelve a mostrar el resto de las apps
+
+#### Scenario: El contador de apps marcadas está al día
+- **WHEN** el usuario vuelve de la pantalla de apps destacadas a los ajustes
+- **THEN** el número de apps marcadas que muestran los ajustes es el actual
+
 ### Requirement: Elección y restablecimiento del fondo
 Los ajustes SHALL permitir elegir entre el fondo de montaña incluido y un fondo sólido
 oscuro, y SHALL permitir restablecer el fondo de montaña original.

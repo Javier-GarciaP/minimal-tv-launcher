@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 class SettingsActivity : Activity() {
 
     private lateinit var prefs: SharedPrefsStore
+    private lateinit var adapter: OptionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,18 @@ class SettingsActivity : Activity() {
         list.layoutManager = LinearLayoutManager(this)
         list.setHasFixedSize(true)
         list.itemAnimator = null
-        list.adapter = OptionAdapter(buildOptions()) { option -> onOptionClicked(option) }
+        adapter = OptionAdapter(buildOptions()) { option -> onOptionClicked(option) }
+        list.adapter = adapter
+    }
+
+    /**
+     * The featured apps can change in the picker, which leaves this screen paused. The
+     * values shown here have to be rebuilt when it comes back, or the count of featured
+     * apps keeps the number it had before.
+     */
+    override fun onResume() {
+        super.onResume()
+        adapter.update(buildOptions())
     }
 
     private fun buildOptions(): List<Option> {
@@ -157,8 +169,7 @@ class SettingsActivity : Activity() {
     }
 
     private fun refresh() {
-        findViewById<RecyclerView>(R.id.option_list).adapter =
-            OptionAdapter(buildOptions()) { option -> onOptionClicked(option) }
+        adapter.update(buildOptions())
     }
 }
 
@@ -175,9 +186,17 @@ sealed interface Option {
 
 /** Adapter for the settings list, with the same focus behaviour as the home screen. */
 class OptionAdapter(
-    private val options: List<Option>,
+    options: List<Option>,
     private val onClick: (Option) -> Unit,
 ) : RecyclerView.Adapter<OptionAdapter.Holder>() {
+
+    private var options: List<Option> = options
+
+    /** Rebuilds the rows keeping the adapter, so the focus is not lost. */
+    fun update(newOptions: List<Option>) {
+        options = newOptions
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = options.size
 
@@ -192,7 +211,7 @@ class OptionAdapter(
     }
 
     override fun onViewRecycled(holder: Holder) {
-        FocusEffects.reset(holder.itemView, scale = false)
+        FocusEffects.sync(holder.itemView, scale = false)
     }
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
@@ -214,7 +233,7 @@ class OptionAdapter(
                 is Option.Action -> value.visibility = View.GONE
             }
             itemView.setOnClickListener { onClick(option) }
-            FocusEffects.reset(itemView, scale = false)
+            FocusEffects.sync(itemView, scale = false)
         }
     }
 }

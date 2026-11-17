@@ -59,7 +59,7 @@ class LauncherAdapter(
     }
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-        if (holder is AppHolder) FocusEffects.reset(holder.itemView)
+        if (holder is AppHolder) FocusEffects.sync(holder.itemView)
     }
 
     private inner class HeaderHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -94,7 +94,7 @@ class LauncherAdapter(
             icon.setImageDrawable(entry.icon)
             icon.visibility = if (entry.icon != null) View.VISIBLE else View.GONE
             itemView.setOnClickListener { onAppClick(entry) }
-            FocusEffects.reset(itemView)
+            FocusEffects.sync(itemView)
         }
 
         fun bindSettings() {
@@ -103,7 +103,7 @@ class LauncherAdapter(
             icon.setImageResource(R.drawable.ic_gear)
             icon.visibility = View.VISIBLE
             itemView.setOnClickListener { onSettingsClick() }
-            FocusEffects.reset(itemView)
+            FocusEffects.sync(itemView)
         }
     }
 

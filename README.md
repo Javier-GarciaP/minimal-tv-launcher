@@ -16,7 +16,9 @@ all.
 
 - **Vertical list** on the left over the wallpaper. The focused row grows and brightens.
 - **Typography first.** The app name is bigger than the icon, readable from the sofa.
-- **Featured apps** pinned to the top, under a `DESTACADAS` heading.
+- **Featured apps** pinned to the top, under a `DESTACADAS` heading. The apps that are
+  not featured go under their own `TODAS LAS APPS` heading, so nothing looks featured by
+  accident.
 - **Settings** is always the last entry.
 - **Featured only mode**: hide every app that is not featured, for a launcher that shows
   four things and nothing else.
@@ -127,7 +129,8 @@ drawable type, so it is covered by unit tests. `SharedPrefsStore` takes a
 
 15 unit tests cover the list ordering (featured first, alphabetical, accents sorted
 correctly), the settings entry always being last, the launcher never listing itself, the
-featured-only filter, and the preferences surviving a new store instance.
+featured-only filter, the focus sizes, and the preferences surviving a new store
+instance.
 
 ## Privacy
 

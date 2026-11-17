@@ -53,7 +53,35 @@ class AppListBuilderTest {
         assertEquals(Row.Header(AppListBuilder.HEADER_FEATURED), rows[0])
         assertEquals("c", (rows[1] as Row.App).entry.packageName)
         assertTrue((rows[1] as Row.App).featured)
-        assertFalse((rows[2] as Row.App).featured)
+        assertEquals(Row.Header(AppListBuilder.HEADER_OTHERS), rows[2])
+        assertFalse((rows[3] as Row.App).featured)
+    }
+
+    @Test
+    fun `the rest of the apps get their own header so nothing looks featured by mistake`() {
+        val rows = build(
+            entries = listOf(entry("a", "Alfa"), entry("b", "Beta"), entry("c", "Ceta")),
+            featured = setOf("c"),
+        )
+
+        assertEquals(Row.Header(AppListBuilder.HEADER_OTHERS), rows[2])
+    }
+
+    @Test
+    fun `no second header when every app is featured`() {
+        val rows = build(
+            entries = listOf(entry("a", "Alfa"), entry("b", "Beta")),
+            featured = setOf("a", "b"),
+        )
+
+        assertTrue(rows.none { it is Row.Header && it.title == AppListBuilder.HEADER_OTHERS })
+    }
+
+    @Test
+    fun `no second header when nothing is featured`() {
+        val rows = build(entries = listOf(entry("a", "Alfa"), entry("b", "Beta")))
+
+        assertTrue(rows.none { it is Row.Header })
     }
 
     @Test

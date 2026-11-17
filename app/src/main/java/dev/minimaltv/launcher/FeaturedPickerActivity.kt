@@ -64,7 +64,7 @@ class PickerAdapter(
     }
 
     override fun onViewRecycled(holder: Holder) {
-        FocusEffects.reset(holder.itemView, scale = false)
+        FocusEffects.sync(holder.itemView, scale = false)
     }
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
@@ -92,7 +92,7 @@ class PickerAdapter(
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) notifyItemChanged(position)
             }
-            FocusEffects.reset(itemView, scale = false)
+            FocusEffects.sync(itemView, scale = false)
         }
     }
 }

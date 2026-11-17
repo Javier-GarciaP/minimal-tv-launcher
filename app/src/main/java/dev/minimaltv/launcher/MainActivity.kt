@@ -71,16 +71,34 @@ class MainActivity : Activity() {
         }, "app-loader").apply { isDaemon = true }.start()
     }
 
-    /** Puts the focus back on the row the user was on, instead of jumping to the top. */
+    /**
+     * Puts the focus back on the row the user was on, instead of jumping to the top.
+     *
+     * Rebinding the list does not fire the focus listener, so a row that keeps the
+     * focus would stay in the unfocused look: the selection box without the growth.
+     * The rows are synced again once the focus has been granted.
+     */
     private fun restoreFocus() {
-        val target = pendingFocusPackage ?: return
+        val target = pendingFocusPackage
         pendingFocusPackage = null
-        val position = adapter.positionOf(target)
-        if (position == RecyclerView.NO_POSITION) return
         val list = findViewById<RecyclerView>(R.id.app_list)
-        list.post {
-            val holder = list.findViewHolderForAdapterPosition(position)
-            holder?.itemView?.requestFocus()
+
+        val position = target?.let { adapter.positionOf(it) } ?: RecyclerView.NO_POSITION
+        if (position != RecyclerView.NO_POSITION) {
+            list.scrollToPosition(position)
+            list.post {
+                list.findViewHolderForAdapterPosition(position)?.itemView?.requestFocus()
+                list.post { syncVisibleRows(list) }
+            }
+            return
+        }
+        list.post { syncVisibleRows(list) }
+    }
+
+    /** Applies the focus look to every row currently on screen. */
+    private fun syncVisibleRows(list: RecyclerView) {
+        for (index in 0 until list.childCount) {
+            FocusEffects.sync(list.getChildAt(index))
         }
     }
 

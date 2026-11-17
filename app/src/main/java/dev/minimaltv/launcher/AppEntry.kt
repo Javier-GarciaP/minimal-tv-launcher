@@ -32,6 +32,7 @@ sealed interface Row {
 object AppListBuilder {
 
     const val HEADER_FEATURED = "Destacadas"
+    const val HEADER_OTHERS = "Todas las apps"
 
     fun build(
         entries: List<AppEntry>,
@@ -44,12 +45,17 @@ object AppListBuilder {
         val sorted = visible.sortedWith { a, b -> collator.compare(a.label, b.label) }
         val (featuredEntries, others) = sorted.partition { it.packageName in featured }
 
-        val rows = ArrayList<Row>(sorted.size + 2)
+        val rows = ArrayList<Row>(sorted.size + 3)
         if (featuredEntries.isNotEmpty()) {
             rows += Row.Header(HEADER_FEATURED)
             featuredEntries.forEach { rows += Row.App(it, featured = true) }
         }
         if (!showFeaturedOnly) {
+            // The second header keeps the rest of the apps visually apart from the
+            // featured group, so nothing looks featured by accident.
+            if (featuredEntries.isNotEmpty() && others.isNotEmpty()) {
+                rows += Row.Header(HEADER_OTHERS)
+            }
             others.forEach { rows += Row.App(it, featured = false) }
         }
         rows += Row.Settings
