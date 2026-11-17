@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Far ridge -->
+    <path
+        android:fillColor="#FF2E3A4A"
+        android:pathData="M20,76 L44,44 L68,76 Z" />
+    <!-- Near ridge -->
+    <path
+        android:fillColor="#FF4A5C74"
+        android:pathData="M38,76 L62,46 L88,76 Z" />
+    <!-- Warm glow on the horizon -->
+    <path
+        android:fillColor="#FFE8A25C"
+        android:pathData="M74,34m-7,0a7,7 0,1 1,14 0a7,7 0,1 1,-14 0" />
+</vector>

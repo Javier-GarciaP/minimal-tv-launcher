@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Minimal TV</string>
+    <string name="settings_title">Configuración</string>
+    <string name="settings_entry">Configuración</string>
+    <string name="featured_picker_title">Apps destacadas</string>
+
+    <string name="opt_featured">Apps destacadas</string>
+    <string name="opt_featured_value">%1$d marcadas</string>
+    <string name="opt_wallpaper">Fondo</string>
+    <string name="opt_reset_wallpaper">Restablecer el fondo de montaña</string>
+    <string name="opt_font_size">Tamaño del texto</string>
+    <string name="opt_featured_only">Mostrar solo las apps destacadas</string>
+
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+
+    <string name="wallpaper_mountains">Montañas</string>
+    <string name="wallpaper_solid">Sólido</string>
+
+    <string name="font_small">Pequeño</string>
+    <string name="font_medium">Medio</string>
+    <string name="font_large">Grande</string>
+</resources>

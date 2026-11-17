@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <ImageView
+        android:id="@+id/wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wallpaper_mountains" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/scrim_start" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/app_list"
+        android:layout_width="@dimen/list_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:clipToPadding="false"
+        android:descendantFocusability="afterDescendants"
+        android:focusable="false"
+        android:paddingStart="@dimen/list_margin"
+        android:paddingTop="@dimen/list_padding_vertical"
+        android:paddingEnd="@dimen/list_padding_end"
+        android:paddingBottom="@dimen/list_padding_vertical"
+        android:scrollbars="none" />
+
+</FrameLayout>

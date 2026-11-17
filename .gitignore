@@ -1,0 +1,20 @@
+# Gradle
+.gradle/
+build/
+local.properties
+
+# Signing material: never commit a keystore
+keystore.properties
+*.jks
+*.keystore
+
+# Device specific backups taken by the scripts
+backup/
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# OpenSpec work in progress
+openspec/changes/*/.openspec.yaml
