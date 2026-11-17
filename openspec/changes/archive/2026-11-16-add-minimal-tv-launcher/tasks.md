@@ -86,7 +86,7 @@
       los comandos que aparecen se ejecutan tal cual
 - [x] 7.2 Añadir `LICENSE` (MIT), `.gitignore` y `CONTRIBUTING.md`; verificar que
       `git status` no muestra artefactos de build
-- [ ] 7.3 Actualizar `MEMORY.md` con el estado final y el siguiente paso, y crear la nota
+- [x] 7.3 Actualizar `MEMORY.md` con el estado final y el siguiente paso, y crear la nota
       del proyecto en el cerebro del usuario
 
 ## Workflow follow-up
