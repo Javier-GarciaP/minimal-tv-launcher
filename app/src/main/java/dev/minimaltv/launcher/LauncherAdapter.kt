@@ -34,6 +34,9 @@ class LauncherAdapter(
     fun positionOf(packageName: String): Int =
         rows.indexOfFirst { it is Row.App && it.entry.packageName == packageName }
 
+    /** Position of the first app, or -1 when the list has none. */
+    fun positionOfFirstApp(): Int = rows.indexOfFirst { it is Row.App }
+
     override fun getItemCount(): Int = rows.size
 
     override fun getItemViewType(position: Int): Int = when (rows[position]) {

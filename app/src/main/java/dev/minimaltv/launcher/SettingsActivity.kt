@@ -47,6 +47,12 @@ class SettingsActivity : Activity() {
         adapter.update(buildOptions())
     }
 
+    override fun onPause() {
+        super.onPause()
+        // The home screen starts again from the first app when it comes back.
+        MainActivity.restartAtFirstApp = true
+    }
+
     private fun buildOptions(): List<Option> {
         val options = mutableListOf<Option>(
             Option.Item(
@@ -152,14 +158,24 @@ class SettingsActivity : Activity() {
             .show()
     }
 
-    /** Pushes the mountain image to the system wallpaper so the transition is seamless. */
+    /**
+     * Pushes the mountain image to the system wallpaper so the transition is seamless.
+     *
+     * Done off the main thread: decoding the image and handing it to the wallpaper
+     * service takes long enough on this TV to freeze the settings screen.
+     */
     private fun applySystemWallpaper() {
-        runCatching {
-            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.wallpaper_mountains)
-            if (bitmap != null) {
-                WallpaperManager.getInstance(this).setBitmap(bitmap)
+        val context = applicationContext
+        val res = resources
+        Thread {
+            runCatching {
+                val bitmap = BitmapFactory.decodeResource(res, R.drawable.wallpaper_mountains)
+                if (bitmap != null) WallpaperManager.getInstance(context).setBitmap(bitmap)
             }
-        }
+        }.apply {
+            name = "system-wallpaper"
+            isDaemon = true
+        }.start()
     }
 
     private fun fontScaleLabel(scale: Float): Int = when {

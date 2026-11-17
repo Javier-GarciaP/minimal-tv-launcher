@@ -92,3 +92,16 @@ inicio, y SHALL NOT consume red.
 #### Scenario: Funcionamiento sin red
 - **WHEN** el dispositivo no tiene conexión a internet
 - **THEN** la pantalla de inicio carga igual y muestra todas las apps
+
+### Requirement: Punto de partida de la lista
+El botón de inicio SHALL llevar el foco a la primera app de la lista, tanto si el usuario
+viene de otra aplicación como si ya estaba en la pantalla de inicio con el foco en otra
+posición. La lista SHALL mostrar un elemento enfocado en todo momento.
+
+#### Scenario: Volver desde los ajustes
+- **WHEN** el usuario pulsa inicio estando en Configuración
+- **THEN** la pantalla de inicio aparece con el foco en la primera app, no en Configuración
+
+#### Scenario: Pulsar inicio en la propia pantalla de inicio
+- **WHEN** el usuario pulsa inicio con el foco en un elemento intermedio de la lista
+- **THEN** el foco vuelve a la primera app y la lista se desplaza hasta arriba

@@ -40,11 +40,12 @@ inmediato.
 
 ### Requirement: Elección y restablecimiento del fondo
 Los ajustes SHALL permitir elegir entre el fondo de montaña incluido y un fondo sólido
-oscuro, y SHALL permitir restablecer el fondo de montaña original.
+oscuro, y SHALL permitir restablecer el fondo de montaña original. El cambio SHALL verse
+en la pantalla de inicio al volver a ella, sin reiniciar el launcher.
 
 #### Scenario: Cambio a fondo sólido
-- **WHEN** el usuario elige el fondo sólido
-- **THEN** la pantalla de inicio deja de mostrar la imagen de montañas
+- **WHEN** el usuario elige el fondo sólido y vuelve a la pantalla de inicio
+- **THEN** la pantalla de inicio muestra el fondo sólido, sin la imagen de montañas
 
 #### Scenario: Restablecer el fondo original
 - **WHEN** el usuario restablece el fondo tras haberlo cambiado

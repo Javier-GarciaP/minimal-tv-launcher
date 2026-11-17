@@ -20,9 +20,12 @@ all.
   not featured go under their own `TODAS LAS APPS` heading, so nothing looks featured by
   accident.
 - **Settings** is always the last entry.
+- **The home button is a starting point**: it always takes the focus back to the first
+  app, so the list never opens in the middle.
 - **Featured only mode**: hide every app that is not featured, for a launcher that shows
   four things and nothing else.
-- **Mountain wallpaper**, generated for this project.
+- **Mountain wallpaper or a solid dark one**, switched from the settings and applied at
+  once, without restarting the launcher.
 - **Spanish** interface.
 
 ## Requirements
