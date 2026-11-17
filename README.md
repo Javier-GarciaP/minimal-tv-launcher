@@ -35,10 +35,12 @@ all.
 
 ## Install
 
-The launcher is not on the Play Store. Sideload the APK over ADB:
+The launcher is not on the Play Store. Download the signed APK from the
+[latest release](https://github.com/Javier-GarciaP/minimal-tv-launcher/releases/latest)
+and sideload it over ADB:
 
 ```bash
-adb install -r app-release.apk
+adb install -r minimal-tv-launcher-1.0.0.apk
 ```
 
 Then make it the home screen. On Android TV the stock launcher and the setup wizard both
