@@ -11,6 +11,9 @@ keystore.properties
 # Device specific backups taken by the scripts
 backup/
 
+# Working memory: it holds the details of the user's own device, so it stays local
+MEMORY.md
+
 # IDE
 .idea/
 *.iml
