@@ -130,7 +130,7 @@ drawable type, so it is covered by unit tests. `SharedPrefsStore` takes a
 ./gradlew :app:testDebugUnitTest
 ```
 
-15 unit tests cover the list ordering (featured first, alphabetical, accents sorted
+22 unit tests cover the list ordering (featured first, alphabetical, accents sorted
 correctly), the settings entry always being last, the launcher never listing itself, the
 featured-only filter, the focus sizes, and the preferences surviving a new store
 instance.
